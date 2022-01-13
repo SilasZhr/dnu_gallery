@@ -15,8 +15,8 @@ task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
 });
 task("deploy", "Deploy the smart contracts", async (taskArgs, hre) => {
 
-  const Artwork = await hre.ethers.getContractFactory("Artwork");
-  const artwork = await Artwork.deploy("Artwork Contract", "ART");
+  const Artwork = await hre.ethers.getContractFactory("DNU");
+  const artwork = await Artwork.deploy("Digital New Union", "DNU");
 
   await artwork.deployed();
 
@@ -27,7 +27,6 @@ task("deploy", "Deploy the smart contracts", async (taskArgs, hre) => {
       "ART"
     ]
   })
-
 })
 // You need to export an object to set up your config
 // Go to https://hardhat.org/config/ to learn more

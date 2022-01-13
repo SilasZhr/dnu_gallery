@@ -1,7 +1,7 @@
 pragma solidity 0.8.4;
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 
-contract Artwork is ERC721 {
+contract DNU is ERC721 {
     uint256 public tokenCounter;
     mapping(uint256 => string) private _tokenURIs;
 
