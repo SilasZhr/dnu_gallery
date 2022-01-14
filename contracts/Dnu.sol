@@ -134,7 +134,7 @@ contract Dnu is ERC721, Ownable, AccessControl {
 
     /**
      *@dev check the tokenURI by tokenId
-     *@param _tokenId Id of NFT
+     *@param tokenId Id of NFT
      *@return the tokenURI by tokenId
      */
     function tokenURI(uint256 tokenId)
