@@ -3,11 +3,12 @@ import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/access/AccessControl.sol";
 
-
 contract Dnu is ERC721,Ownable,AccessControl {
     bytes32 public constant MEMBER_ROLE = keccak256("MEMBER_ROLE");
 
     uint256 public tokenCounter;
+    string public zeroTokenURI;
+    string public baseTokenURI;
     mapping(uint256 => string) private _tokenURIs;
 
     constructor(string memory name, string memory symbol) ERC721(name, symbol) {
@@ -17,6 +18,14 @@ contract Dnu is ERC721,Ownable,AccessControl {
 
     function supportsInterface(bytes4 interfaceId) public view virtual override(ERC721, AccessControl) returns (bool) {
         return super.supportsInterface(interfaceId);
+    }
+
+    function setZeroTokenURI(string memory tokenURI) public onlyOwner{
+        zeroTokenURI=tokenURI;
+    }
+
+    function setBaseTokenURI(string memory tokenURI) public onlyOwner{
+        baseTokenURI=tokenURI;
     }
 
     function addMembers(address[] memory members) public onlyOwner{
@@ -29,16 +38,16 @@ contract Dnu is ERC721,Ownable,AccessControl {
         return hasRole(MEMBER_ROLE,member);
     }
 
-    function mintZero(string memory tokenURI) public onlyOwner{
+    function mintZero() public onlyOwner{
         _safeMint(msg.sender, tokenCounter);
-        _setTokenURI(tokenCounter, tokenURI);
+        _setTokenURI(tokenCounter, zeroTokenURI);
 
         tokenCounter++;
     }
 
-    function mint(string memory tokenURI) public onlyRole(MEMBER_ROLE){
+    function mint() public onlyRole(MEMBER_ROLE){
         _safeMint(msg.sender, tokenCounter);
-        _setTokenURI(tokenCounter, tokenURI);
+        _setTokenURI(tokenCounter, baseTokenURI);
 
         tokenCounter++;
     }
